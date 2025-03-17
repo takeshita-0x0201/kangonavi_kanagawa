@@ -1,0 +1,1 @@
+# kangonavi_kanagawa
