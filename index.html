@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神奈川看護ナビ - 看護師採用支援サービス</title>
+    <style>
+        /* 基本スタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        h2 {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a5f9c;
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: #1a5f9c;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        p {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .section-divider {
+            height: 100px;
+            background-image: url('/api/placeholder/1200/100');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ヘッダー */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a5f9c;
+        }
+        
+        .logo span {
+            color: #ff6b6b;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover {
+            color: #1a5f9c;
+        }
+        
+        /* ヒーローセクション */
+        .hero {
+            background: linear-gradient(135deg, #e6f2ff 0%, #ffffff 100%);
+            padding: 180px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background-image: url('/api/placeholder/600/800');
+            background-size: cover;
+            opacity: 0.1;
+        }
+        
+        .hero h1 {
+            font-size: 44px;
+            color: #1a5f9c;
+            margin-bottom: 30px;
+            line-height: 1.3;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+        
+        .hero-btn {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: white;
+            padding: 18px 50px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .hero-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
+        }
+        
+        /* サービス概要 */
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .about-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* メリット */
+        .benefits {
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        
+        .benefits-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .benefit-card {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-card h3 {
+            font-size: 22px;
+            color: #1a5f9c;
+            margin: 20px 0;
+        }
+        
+        .benefit-icon {
+            font-size: 48px;
+            color: #1a5f9c;
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            border-radius: 50%;
+            background-color: rgba(26, 95, 156, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        .benefits-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* 導入事例 */
+        .cases {
+            background-color: white;
+            position: relative;
+        }
+        
+        .case-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .case-item {
+            flex: 1;
+            min-width: 300px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+        
+        .case-item h3 {
+            font-size: 22px;
+            color: #1a5f9c;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .case-result {
+            background-color: #e6f2ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .case-result h4 {
+            color: #1a5f9c;
+            margin-bottom: 10px;
+        }
+        
+        .cases-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* 導入フロー */
+        .flow {
+            background-color: #f9f9f9;
+            position: relative;
+        }
+        
+        .flow-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+        
+        .flow-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            position: relative;
+            padding: 0 15px;
+            margin-bottom: 30px;
+        }
+        
+        .flow-step:not(:last-child):after {
+            content: "→";
+            position: absolute;
+            right: -10px;
+            top: 50px;
+            font-size: 30px;
+            color: #1a5f9c;
+            z-index: 1;
+        }
+        
+        .step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            background-color: #1a5f9c;
+            color: white;
+            border-radius: 50%;
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(26, 95, 156, 0.3);
+        }
+        
+        .flow-step h3 {
+            font-size: 20px;
+            color: #1a5f9c;
+            margin-bottom: 15px;
+        }
+        
+        .flow-cta {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        /* FAQ */
+        .faq {
+            background-color: white;
+            position: relative;
+        }
+        
+        .faq-items {
+            max-width: 900px;
+            margin: 0 auto 50px;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            color: #1a5f9c;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f0f7ff;
+        }
+        
+        .faq-question:after {
+            content: "+";
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-item.active .faq-question:after {
+            content: "-";
+            transform: rotate(180deg);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 1000px;
+        }
+        
+        .faq-cta {
+            text-align: center;
+            margin-top: 50px;
+        }
+        
+        /* お問い合わせ */
+        .contact {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+            position: relative;
+            padding: 100px 0;
+        }
+        
+        .contact h2 {
+            margin-bottom: 50px;
+        }
+        
+        .contact-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1a5f9c;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #1a5f9c;
+            outline: none;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-note {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .submit-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+            display: block;
+            margin: 30px auto 0;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #ff5252;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+.contact-info {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+        }
+        
+        .contact-info p {
+            margin-bottom: 10px;
+        }
+        
+        /* フッター */
+        footer {
+            background-color: #1a5f9c;
+            color: white;
+            padding: 50px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .footer-info {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo span {
+            color: #ff6b6b;
+        }
+        
+        .footer-address {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links ul li a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        
+        /* CTA固定バナー */
+        .fixed-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: translateY(100%);
+            transition: transform 0.5s;
+        }
+        
+        .fixed-cta.show {
+            transform: translateY(0);
+        }
+        
+        .fixed-cta-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .fixed-cta-text {
+            font-weight: bold;
+            font-size: 18px;
+            color: #1a5f9c;
+        }
+        
+        /* アニメーション */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* レスポンシブデザイン */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .about-content {
+                flex-direction: column-reverse;
+            }
+            
+            .flow-step:not(:last-child):after {
+                display: none;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+            
+            .fixed-cta-content {
+                flex-direction: column;
+                gap: 10px;
+                padding: 0 20px;
+            }
+            
+            .fixed-cta-text {
+                font-size: 16px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">神奈川<span>看護</span>ナビ</div>
+                <nav>
+                    <ul>
+                        <li><a href="#about">サービス概要</a></li>
+                        <li><a href="#benefits">利用メリット</a></li>
+                        <li><a href="#cases">導入事例</a></li>
+                        <li><a href="#flow">導入フロー</a></li>
+                        <li><a href="#faq">よくある質問</a></li>
+                        <li><a href="#contact" class="btn">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- ヒーローセクション -->
+    <section class="hero">
+        <div class="container">
+            <h1>神奈川県特化型<br>看護師採用支援サービス</h1>
+            <p>地域密着だからこそ実現できる、高品質な看護師採用をサポート<br>神奈川県内の医療機関様の人材確保を強力にバックアップします</p>
+            <a href="#contact" class="hero-btn">無料相談はこちら</a>
+        </div>
+    </section>
+
+    <!-- サービス概要 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>サービス概要</h2>
+            <div class="about-content">
+                <div class="about-text fade-in">
+                    <p><strong>「神奈川看護ナビ」</strong>は、神奈川県内の医療機関における看護師採用を専門的にサポートする採用支援サービスです。</p>
+                    <p><strong>神奈川県特化型</strong>だからこそ持つ地域密着ネットワークを活かし、求職者と医療機関の双方にとって最適なマッチングを実現します。</p>
+                    <p>看護師不足でお悩みの医療機関様に対して、採用コスト削減と質の高い人材確保を両立させる解決策をご提供します。</p>
+                    <a href="#contact" class="btn">まずは無料相談</a>
+                </div>
+                <div class="about-image fade-in">
+                    <img src="/api/placeholder/500/300" alt="神奈川看護ナビイメージ">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- メリット -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2>導入メリット</h2>
+            <div class="benefits-cards">
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">🔍</div>
+                    <h3>神奈川県内特化の<br>独自ネットワーク</h3>
+                    <p>地域密着型のネットワークを活かし、神奈川県内の看護師求職者にピンポイントでアプローチ。大手サイトでは届かない潜在層へのリーチが可能です。</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">💰</div>
+                    <h3>費用対効果の高い<br>採用を実現</h3>
+                    <p>大手転職サイトと比較して低コストで質の高い採用が可能。成功報酬型の料金体系で、採用が決まるまで費用は発生しません。</p>
+                </div>
+                <div class="benefit-card fade-in">
+                    <div class="benefit-icon">👩‍⚕️</div>
+                    <h3>専任アドバイザーによる<br>きめ細かなサポート</h3>
+                    <p>医療業界に精通した専任アドバイザーが、求人票の作成から面接対策まで一貫してサポート。採用成功率を高めます。</p>
+                </div>
+            </div>
+            <div class="benefits-cta fade-in">
+                <a href="#contact" class="btn">メリットについて詳しく聞く</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入事例 -->
+    <section id="cases" class="cases">
+        <div class="container">
+            <h2>導入事例</h2>
+            <div class="case-items">
+                <div class="case-item fade-in">
+                    <h3>A総合病院様（200床）</h3>
+                    <p>慢性的な看護師不足に悩まされていた総合病院。特に夜勤対応可能な看護師の確保が課題でした。</p>
+                    <div class="case-result">
+                        <h4>導入結果</h4>
+                        <p>3ヶ月で5名の正看護師採用に成功。採用コストも前年比30%削減できました。</p>
+                    </div>
+                </div>
+                <div class="case-item fade-in">
+                    <h3>Bクリニック様（内科・小児科）</h3>
+                    <p>開院に伴い、地域密着型の小児科クリニックとして信頼される看護師チームの構築が必要でした。</p>
+                    <div class="case-result">
+                        <h4>導入結果</h4>
+                        <p>開院前に経験豊富な看護師4名の採用に成功。地域評価の高いクリニックとしてスタートできました。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="cases-cta fade-in">
+                <a href="#contact" class="btn">あなたの病院に最適なプランを提案します</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 導入フロー -->
+    <section id="flow" class="flow">
+        <div class="container">
+            <h2>サービス導入の流れ</h2>
+            <div class="flow-steps">
+                <div class="flow-step fade-in">
+                    <div class="step-number">1</div>
+                    <h3>お問い合わせ</h3>
+                    <p>フォームまたはお電話にて初回お問い合わせください。</p>
+                </div>
+                <div class="flow-step fade-in">
+                    <div class="step-number">2</div>
+                    <h3>ヒアリング</h3>
+                    <p>貴院の採用状況や希望条件について詳しくお伺いします。</p>
+                </div>
+                <div class="flow-step fade-in">
+                    <div class="step-number">3</div>
+                    <h3>求人掲載</h3>
+                    <p>魅力的な求人票を作成し、当社ネットワークに掲載します。</p>
+                </div>
+                <div class="flow-step fade-in">
+                    <div class="step-number">4</div>
+                    <h3>採用開始</h3>
+                    <p>面接から入職までを丁寧にサポートします。</p>
+                </div>
+            </div>
+            <div class="flow-cta fade-in">
+                <a href="#contact" class="btn">まずは無料相談からスタート</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>よくある質問</h2>
+            <div class="faq-items">
+                <div class="faq-item fade-in">
+                    <div class="faq-question">サービス利用料金はいくらですか？</div>
+                    <div class="faq-answer">
+                        <p>基本的には成功報酬型の料金体系となっております。採用が決まった場合のみ、看護師の年収の○%をご請求させていただきます。詳細な料金については、お問い合わせください。</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">掲載から採用までどのくらいの期間がかかりますか？</div>
+                    <div class="faq-answer">
+                        <p>求人条件や時期にもよりますが、平均的には掲載から1〜3ヶ月程度で採用が決まるケースが多いです。緊急採用の場合は、最短2週間での採用実績もございます。</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">採用が成功しなかった場合の費用は発生しますか？</div>
+                    <div class="faq-answer">
+                        <p>いいえ、当サービスは完全成功報酬型ですので、採用が成立しなかった場合は費用は一切発生いたしません。安心してご利用いただけます。</p>
+                    </div>
+                </div>
+                <div class="faq-item fade-in">
+                    <div class="faq-question">他の大手看護師転職サイトとの違いは何ですか？</div>
+                    <div class="faq-answer">
+                        <p>当サービスは神奈川県に特化しているため、地域の看護師市場に精通しています。また、大手にはない地域密着型のネットワークがあり、潜在的な看護師へのアプローチが可能です。さらに、専任アドバイザーによるきめ細かなサポートと、大手<p>当サービスは神奈川県に特化しているため、地域の看護師市場に精通しています。また、大手にはない地域密着型のネットワークがあり、潜在的な看護師へのアプローチが可能です。さらに、専任アドバイザーによるきめ細かなサポートと、大手と比較して低コストな料金体系も魅力です。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq-cta fade-in">
+                <a href="#contact" class="btn">その他のご質問はこちら</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせ -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>お問い合わせ</h2>
+            <div class="contact-form fade-in">
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label for="hospital">病院・施設名 <span style="color: #ff6b6b;">*</span></label>
+                        <input type="text" id="hospital" name="hospital" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">ご担当者名 <span style="color: #ff6b6b;">*</span></label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス <span style="color: #ff6b6b;">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">電話番号 <span style="color: #ff6b6b;">*</span></label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">お問い合わせ内容</label>
+                        <textarea id="message" name="message"></textarea>
+                        <p class="form-note">採用予定人数や希望条件などについてご記入いただくとスムーズです。</p>
+                    </div>
+                    <button type="submit" class="submit-btn">無料相談を申し込む</button>
+                </form>
+                <div class="contact-info">
+                    <p>※ご入力いただいた情報は、お問い合わせへの対応以外には使用いたしません。</p>
+                    <p>※お問い合わせ後、担当者より1営業日以内にご連絡いたします。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">神奈川<span>看護</span>ナビ</div>
+                    <div class="footer-address">
+                        株式会社○○○○<br>
+                        〒231-0000 神奈川県横浜市中区○○町1-2-3<br>
+                        TEL: 045-XXX-XXXX（平日9:00-18:00）
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="#about">サービス概要</a></li>
+                        <li><a href="#benefits">利用メリット</a></li>
+                        <li><a href="#cases">導入事例</a></li>
+                        <li><a href="#flow">導入フロー</a></li>
+                        <li><a href="#faq">よくある質問</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                        <li><a href="#">プライバシーポリシー</a></li>
+                        <li><a href="#">利用規約</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 神奈川看護ナビ All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- 固定CTA -->
+    <div class="fixed-cta">
+        <div class="container">
+            <div class="fixed-cta-content">
+                <div class="fixed-cta-text">神奈川県特化型の看護師採用支援サービス</div>
+                <a href="#contact" class="btn">無料相談はこちら</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // FAQの開閉
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                item.classList.toggle('active');
+            });
+        });
+
+        // スクロールアニメーション
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeIn = () => {
+            const triggerBottom = window.innerHeight * 0.8;
+            
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < triggerBottom) {
+                    element.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', fadeIn);
+        window.addEventListener('load', fadeIn);
+
+        // 固定CTAの表示
+        const showFixedCta = () => {
+            const fixedCta = document.querySelector('.fixed-cta');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 500) {
+                fixedCta.classList.add('show');
+            } else {
+                fixedCta.classList.remove('show');
+            }
+        };
+        
+        window.addEventListener('scroll', showFixedCta);
+
+        // スムーススクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
