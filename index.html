@@ -950,7 +950,7 @@
                 message: document.getElementById("message").value
             };
         
-            fetch("WEBアプリURL", {
+            fetch("https://script.google.com/macros/s/AKfycbznPpNIG2lPFqGYobrYVxsTOvCWvtcwwIf9hI7pVtIdpyf19rA_psrh6IZymE-5EEVe/exec", {
                 method: "POST",
                 body: JSON.stringify(formData),
                 headers: { "Content-Type": "application/json" }
@@ -958,10 +958,10 @@
             .then(response => response.json())
             .then(data => {
                 if (data.status === "success") {
-                    alert("お問い合わせを送信しました！");
+                    alert("送信完了しました。担当者より折り返しご連絡をいたします。");
                     document.querySelector("form").reset();
                 } else {
-                    alert("送信に失敗しました。");
+                    alert("送信に失敗しました。再度入力をお試しください。");
                 }
             })
             .catch(error => console.error("Error:", error));
