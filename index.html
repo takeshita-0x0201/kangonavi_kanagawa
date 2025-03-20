@@ -939,109 +939,105 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            console.log("DOMが完全に読み込まれました！");
-        
-            const form = document.querySelector(".contact-form form");
-        
-            if (!form) {
-                console.error("❌ フォームが見つかりません！");
-                return;
+    console.log("DOMが完全に読み込まれました！");
+
+    const form = document.querySelector(".contact-form form");
+
+    if (!form) {
+        console.error("❌ フォームが見つかりません！");
+        return;
+    }
+
+    console.log("✅ フォームが見つかりました。イベントリスナーを設定します。");
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        console.log("✅ フォームが送信されました！");
+
+        fetch("https://script.google.com/macros/s/AKfycbw0brSYYypWDOj71ufHBfw5hYqcxVnh5XufNLjYMopfvVOzZ5XCi11Iuopr8BTmWnv8/exec", {
+            method: "POST",
+            mode: "cors", // CORSを有効化
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: new URLSearchParams(new FormData(form))
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("サーバーからのレスポンス:", data);
+            if (data.status === "success") {
+                alert("送信完了しました！");
+                form.reset();  // フォームをリセット
+            } else {
+                alert("送信に失敗しました。");
             }
-        
-            console.log("✅ フォームが見つかりました。イベントリスナーを設定します。");
-        
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
-        
-                console.log("✅ フォームが送信されました！");
-        
-                var formData = new FormData();
-                formData.append("hospital", document.getElementById("hospital").value);
-                formData.append("name", document.getElementById("name").value);
-                formData.append("email", document.getElementById("email").value);
-                formData.append("phone", document.getElementById("phone").value);
-                formData.append("message", document.getElementById("message").value);
-        
-                console.log("送信データ:", formData);
-        
-                fetch("https://script.google.com/macros/s/AKfycbwRkoQBDGXFbgjgGOMCev72pLJs2EtKvyTxEnLaghal5hsWiPWgPIC_nbmc--CGPAXg/exec", {
-                    method: "POST",
-                    mode: "cors", // 明示的に CORS を有効化
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded" // FormData の場合は不要
-                    },
-                    body: new URLSearchParams(new FormData(form))
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        alert("送信完了しました！");
-                        form.reset();
-                    } else {
-                        alert("送信に失敗しました。");
-                    }
-                })
-                .catch(error => console.error("Fetch Error:", error));
-        
-            // FAQの開閉
-            document.querySelectorAll('.faq-question').forEach(question => {
-                question.addEventListener('click', () => {
-                    const item = question.parentNode;
-                    item.classList.toggle('active');
-                });
-            });
-        
-            // スクロールアニメーション
-            const fadeElements = document.querySelectorAll('.fade-in');
-        
-            const fadeIn = () => {
-                const triggerBottom = window.innerHeight * 0.8;
-        
-                fadeElements.forEach(element => {
-                    const elementTop = element.getBoundingClientRect().top;
-                    if (elementTop < triggerBottom) {
-                        element.classList.add('visible');
-                    }
-                });
-            };
-        
-            window.addEventListener('scroll', fadeIn);
-            window.addEventListener('load', fadeIn);
-        
-            // 固定CTAの表示
-            const showFixedCta = () => {
-                const fixedCta = document.querySelector('.fixed-cta');
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-                if (scrollTop > 500) {
-                    fixedCta.classList.add('show');
-                } else {
-                    fixedCta.classList.remove('show');
-                }
-            };
-        
-            window.addEventListener('scroll', showFixedCta);
-        
-            // スムーススクロール
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-        
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-        
-                    if (targetElement) {
-                        const headerHeight = document.querySelector('header').offsetHeight;
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+        })
+        .catch(error => {
+            console.error("Fetch Error:", error);
         });
+    });
+
+    // FAQの開閉
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentNode;
+            item.classList.toggle('active');
+        });
+    });
+
+    // スクロールアニメーション
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    const fadeIn = () => {
+        const triggerBottom = window.innerHeight * 0.8;
+
+        fadeElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            if (elementTop < triggerBottom) {
+                element.classList.add('visible');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', fadeIn);
+    window.addEventListener('load', fadeIn);
+
+    // 固定CTAの表示
+    const showFixedCta = () => {
+        const fixedCta = document.querySelector('.fixed-cta');
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > 500) {
+            fixedCta.classList.add('show');
+        } else {
+            fixedCta.classList.remove('show');
+        }
+    };
+
+    window.addEventListener('scroll', showFixedCta);
+
+    // スムーススクロール
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+
     </script>
 </body>
 </html>
