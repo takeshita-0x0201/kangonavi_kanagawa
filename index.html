@@ -963,17 +963,22 @@
             },
             body: new URLSearchParams(new FormData(form))
         })
-        .then(response => response.json())
+        .then(response => {
+            console.log("サーバーからのレスポンス:", response);
+            return response.json();
+        })
         .then(data => {
-            console.log("サーバーからのレスポンス:", data);
+            console.log("サーバーのデータ:", data);
         })
         .catch(error => {
-            console.error("Fetch Error:", error);
+            console.error("❌ Fetch Error:", error);
         })
         .finally(() => {
-            // ここで強制的にアラートを表示し、フォームをリセット
-            alert("送信完了しました！");
-            form.reset();
+            console.log("✅ フォーム処理完了！強制的にアラートを表示します！");
+            setTimeout(() => {
+                alert("送信完了しました！");
+                form.reset();
+            }, 500); // 0.5秒遅延させて確実に実行
         });
     });
 
@@ -1036,7 +1041,6 @@
         });
     });
 });
-
     </script>
 </body>
 </html>
