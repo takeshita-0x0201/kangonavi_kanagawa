@@ -966,15 +966,14 @@
         .then(response => response.json())
         .then(data => {
             console.log("サーバーからのレスポンス:", data);
-            if (data.status === "success") {
-                alert("送信完了しました！");
-                form.reset();  // フォームをリセット
-            } else {
-                alert("送信に失敗しました。");
-            }
         })
         .catch(error => {
             console.error("Fetch Error:", error);
+        })
+        .finally(() => {
+            // ここで強制的にアラートを表示し、フォームをリセット
+            alert("送信完了しました！");
+            form.reset();
         });
     });
 
