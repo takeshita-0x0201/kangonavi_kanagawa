@@ -966,22 +966,22 @@
         
                 fetch("https://script.google.com/macros/s/AKfycbwRkoQBDGXFbgjgGOMCev72pLJs2EtKvyTxEnLaghal5hsWiPWgPIC_nbmc--CGPAXg/exec", {
                     method: "POST",
-                    body: formData  // JSON ではなく FormData を送信
+                    mode: "cors", // 明示的に CORS を有効化
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded" // FormData の場合は不要
+                    },
+                    body: new URLSearchParams(new FormData(form))
                 })
                 .then(response => response.json())
                 .then(data => {
-                    console.log("サーバーからのレスポンス:", data);
                     if (data.status === "success") {
                         alert("送信完了しました！");
-                        form.reset();  // フォームをリセット
+                        form.reset();
                     } else {
                         alert("送信に失敗しました。");
                     }
                 })
-                .catch(error => {
-                    console.error("Fetch Error:", error);
-                });
-            });
+                .catch(error => console.error("Fetch Error:", error));
         
             // FAQの開閉
             document.querySelectorAll('.faq-question').forEach(question => {
